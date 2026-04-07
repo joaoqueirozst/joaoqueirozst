@@ -1,4 +1,3 @@
-# JoaoQueiroz
 <h1 align="center">
   <b>Olá, sou o João!</b>
 </h1>
