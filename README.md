@@ -2,7 +2,7 @@
   <b>Olá, sou o João!</b>
 </h1>
 
-Sou estudante de Engenharia Elétrica no [IFES](https://guarapari.ifes.edu.br), campus Guarapari, e aluno de pesquisa pelo [Lab Penguin](https://github.com/Lab-Penguin) e LabSEA. Atualmente, estou trabalhando com Deep Reinforcement Learning para controle de sistemas contínuos, mas constantemente, realizo projetos na área de robótica e visão computacional.
+Sou estudante de Engenharia Elétrica no [IFES](https://guarapari.ifes.edu.br), campus Guarapari, e aluno de pesquisa pelo [Lab Penguin](https://github.com/Lab-Penguin) e [LabSEA](https://github.com/Lab-SEA). Atualmente, estou trabalhando com Deep Reinforcement Learning para controle de sistemas contínuos, mas constantemente, realizo projetos na área de robótica e visão computacional.
 <br>
 
 <!-- <p align="center">
@@ -23,7 +23,6 @@ Sou estudante de Engenharia Elétrica no [IFES](https://guarapari.ifes.edu.br), 
 - Email: **joao.queirozst@gmail.com**
 - LinkedIn: [João Pedro Queiroz](https://www.linkedin.com/in/joaopqdroqueirozs/)  
 
----
 <div align="center">
 
 </div>
