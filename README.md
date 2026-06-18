@@ -2,7 +2,7 @@
   <b>Olá, sou o João!</b>
 </h1>
 
-Sou estudante de Engenharia Elétrica no [IFES](https://guarapari.ifes.edu.br), campus Guarapari, e aluno de pesquisa pelo [Lab Penguin](https://github.com/Lab-Penguin) e [LabSEA](https://github.com/Lab-SEA). Atualmente, estou trabalhando com Deep Reinforcement Learning para controle de sistemas contínuos, mas constantemente, realizo projetos na área de robótica e visão computacional.
+Curso Engenharia Elétrica no [IFES](https://guarapari.ifes.edu.br), campus Guarapari, e sou aluno de pesquisa pelo [Lab Penguin](https://github.com/Lab-Penguin) e [LabSEA](https://github.com/Lab-SEA). Atualmente, estudo algoritmos que implementam Deep Reinforcement Learning para controle de sistemas contínuos, mas constantemente, realizo projetos na área de robótica e visão computacional.
 <br>
 
 <!-- <p align="center">
