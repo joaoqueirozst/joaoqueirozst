@@ -18,6 +18,24 @@ Curso Engenharia Elétrica no [IFES](https://guarapari.ifes.edu.br), campus Guar
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" width="60"/>
 </p>
 
+<br>
+
+<p align="center">
+  <picture>
+    <source
+      media="(prefers-color-scheme: dark)"
+      srcset="./assets/composition.dark.svg"
+    />
+    <img
+      src="./assets/composition.light.svg"
+      alt="GitHub Contribution Composition"
+      width="100%"
+    />
+  </picture>
+</p>
+
+<br>
+
 ## Contato  
 
 - Email: **joao.queirozst@gmail.com**
