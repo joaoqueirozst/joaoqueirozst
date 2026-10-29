@@ -40,7 +40,7 @@ Curso Engenharia Elétrica no [IFES](https://guarapari.ifes.edu.br), campus Guar
 
 <br><br>
 
-<img src="./profile-3d-contrib/profile-night-green.svg" alt="Gráfico 3D de contribuições" />
+<img src="./profile-3d-contrib/profile-night-white.svg" alt="Gráfico 3D de contribuições em tons de branco" />
 
 <br><br>
 
