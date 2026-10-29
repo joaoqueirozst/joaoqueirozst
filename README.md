@@ -44,6 +44,4 @@ Curso Engenharia Elétrica no [IFES](https://guarapari.ifes.edu.br), campus Guar
 
 <br><br>
 
-<img src="https://github-readme-activity-graph.vercel.app/graph?username=joaoqueirozst&theme=github-compact&hide_border=true&area=true&custom_title=Gr%C3%A1fico%20de%20Contribui%C3%A7%C3%B5es" alt="Gráfico de atividade no GitHub" />
-
 </div>
