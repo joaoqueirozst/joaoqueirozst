@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - ".github/workflows/profile-3d.yml"
+      - ".github/profile-3d-settings.json"
   schedule:
     - cron: "0 6 * * *"
   workflow_dispatch:
