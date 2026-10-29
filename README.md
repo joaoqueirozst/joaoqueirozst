@@ -25,7 +25,10 @@ Curso Engenharia Elétrica no [IFES](https://guarapari.ifes.edu.br), campus Guar
 
 <div align="center">
 
-## 📊 Estatísticas do GitHub
+<details>
+<summary><b>📊 Estatísticas do GitHub</b></summary>
+
+<br>
 
 <img src="https://komarev.com/ghpvc/?username=joaoqueirozst&label=Visualiza%C3%A7%C3%B5es%20do%20perfil&color=0e75b6&style=flat" alt="Visualizações do perfil" />
 
@@ -43,5 +46,7 @@ Curso Engenharia Elétrica no [IFES](https://guarapari.ifes.edu.br), campus Guar
 <img src="./profile-3d-contrib/profile-night-white.svg" alt="Gráfico 3D de contribuições em tons de branco" />
 
 <br><br>
+
+</details>
 
 </div>
