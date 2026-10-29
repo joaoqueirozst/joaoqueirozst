@@ -25,4 +25,25 @@ Curso Engenharia Elétrica no [IFES](https://guarapari.ifes.edu.br), campus Guar
 
 <div align="center">
 
+## 📊 Estatísticas do GitHub
+
+<img src="https://komarev.com/ghpvc/?username=joaoqueirozst&label=Visualiza%C3%A7%C3%B5es%20do%20perfil&color=0e75b6&style=flat" alt="Visualizações do perfil" />
+
+<br><br>
+
+<img src="https://streak-stats.demolab.com?user=joaoqueirozst&theme=github-dark-blue&hide_border=true&locale=pt_BR" alt="Sequência de contribuições no GitHub" />
+
+<br><br>
+
+<img height="180em" src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=joaoqueirozst&theme=github_dark" alt="Estatísticas do GitHub" />
+<img height="180em" src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=joaoqueirozst&theme=github_dark" alt="Linguagens mais usadas" />
+
+<br><br>
+
+<img src="./profile-3d-contrib/profile-night-green.svg" alt="Gráfico 3D de contribuições" />
+
+<br><br>
+
+<img src="https://github-readme-activity-graph.vercel.app/graph?username=joaoqueirozst&theme=github-compact&hide_border=true&area=true&custom_title=Gr%C3%A1fico%20de%20Contribui%C3%A7%C3%B5es" alt="Gráfico de atividade no GitHub" />
+
 </div>
