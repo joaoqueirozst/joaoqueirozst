@@ -26,7 +26,7 @@ Curso Engenharia Elétrica no [IFES](https://guarapari.ifes.edu.br), campus Guar
 <div align="center">
 
 <details>
-<summary><b>📊 Estatísticas do GitHub</b></summary>
+<summary><b>Estatísticas GitHub 🖥️​</b></summary>
 
 <br>
 
