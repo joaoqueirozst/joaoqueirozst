@@ -6,7 +6,10 @@ from html import escape
 from pathlib import Path
 import re
 
-from update_languages import color_for, percentage
+if __package__:
+    from .update_languages import color_for, percentage
+else:
+    from update_languages import color_for, percentage
 
 
 def render_donut(languages):
