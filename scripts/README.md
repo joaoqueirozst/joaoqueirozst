@@ -18,4 +18,5 @@ repositórios, código, URLs privados e tokens não são gravados. Os dados dos
 repositórios privados são atualizados ao executar o script autenticado.
 
 O gráfico circular integrado à imagem 3D usa esses totais, sem agrupar linguagens
-em “other”. O workflow reaplica os totais salvos após cada geração da imagem 3D.
+em “other”. Após regenerar a imagem 3D, execute `python3 scripts/update_donut.py`
+para reaplicar os totais salvos ao gráfico circular.
