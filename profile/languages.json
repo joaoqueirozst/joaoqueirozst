@@ -1,7 +1,7 @@
 {
   "scope": "owned_repositories_public_and_private_including_forks",
   "language_bytes": {
-    "Python": 271010,
+    "Python": 278085,
     "HTML": 24386,
     "C++": 12156,
     "Dockerfile": 4831,

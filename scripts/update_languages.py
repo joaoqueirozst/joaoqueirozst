@@ -111,7 +111,8 @@ def main():
     data = {'scope': 'owned_repositories_public_and_private_including_forks',
             'language_bytes': languages}
     (output / 'languages.json').write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n')
-    (output / 'languages.svg').write_text(render_svg(languages))
+    from update_donut import main as update_donut
+    update_donut()
     print('Grafico atualizado: {} linguagens.'.format(len(languages)))
     print(', '.join(languages))
 

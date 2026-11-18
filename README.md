@@ -34,15 +34,7 @@ Curso Engenharia Elétrica no [IFES](https://guarapari.ifes.edu.br), campus Guar
 
 <br><br>
 
-<img src="https://streak-stats.demolab.com?user=joaoqueirozst&theme=github-dark-blue&hide_border=true&locale=pt_BR" alt="Sequência de contribuições no GitHub" />
-
-<br><br>
-
 <img height="180em" src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=joaoqueirozst&theme=github_dark" alt="Estatísticas do GitHub" />
-
-<br><br>
-
-<img width="495" src="./profile/languages.svg" alt="Todas as linguagens dos meus repositórios públicos e privados" />
 
 <br><br>
 
