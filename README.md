@@ -39,7 +39,10 @@ Curso Engenharia Elétrica no [IFES](https://guarapari.ifes.edu.br), campus Guar
 <br><br>
 
 <img height="180em" src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=joaoqueirozst&theme=github_dark" alt="Estatísticas do GitHub" />
-<img height="180em" src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=joaoqueirozst&theme=github_dark" alt="Linguagens mais usadas" />
+
+<br><br>
+
+<img width="495" src="./profile/languages.svg" alt="Todas as linguagens dos meus repositórios públicos e privados" />
 
 <br><br>
 
