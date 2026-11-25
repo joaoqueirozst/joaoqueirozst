@@ -9,6 +9,7 @@ on:
     paths:
       - .github/workflows/profile-stats.yml
       - scripts/update_stats.py
+      - scripts/templates/**
       - tests/test_stats.py
 
 permissions:
@@ -51,7 +52,9 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.PROFILE_STATS_TOKEN }}
           PROFILE_OWNER: ${{ github.repository_owner }}
-        run: python3 scripts/update_stats.py --username "$PROFILE_OWNER"
+        run: |
+          python3 scripts/update_stats.py --username "$PROFILE_OWNER"
+          echo "Dados consultados em $(date -u '+%Y-%m-%d %H:%M UTC'). O layout original do Stats foi preservado." >> "$GITHUB_STEP_SUMMARY"
 
       - name: Publicar o cartão atualizado
         if: steps.credential.outputs.configured == 'true'

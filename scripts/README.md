@@ -24,13 +24,14 @@ para reaplicar os totais salvos ao gráfico circular.
 ## Atualizar as estatísticas do perfil
 
 O cartão `profile/stats.svg` é gerado por `scripts/update_stats.py`, consultando a
-API GraphQL com o GitHub CLI autenticado como o dono do perfil. O cartão externo
-anterior não tinha acesso aos PRs dos repositórios privados do usuário.
+API GraphQL com o GitHub CLI autenticado como o dono do perfil. O layout original
+do GitHub Profile Summary Cards, tema `github_dark`, é preservado integralmente:
+título, dimensões, cores, ícones, logotipo e as mesmas cinco linhas. Somente os
+valores numéricos são atualizados. O serviço externo anterior não tinha acesso
+aos PRs dos repositórios privados do usuário.
 
 - **Total PRs:** todos os PRs de autoria do usuário acessíveis à credencial,
   incluindo abertos, fechados e incorporados, públicos e privados.
-- **PRs incorporados:** subconjunto que já recebeu merge. Não é uma contagem de
-  medalhas nem uma garantia de elegibilidade para conquistas.
 - **Total Issues:** issues de autoria do usuário acessíveis à credencial.
 - **Commits:** contribuições de commits reconhecidas pelo GitHub nos últimos
   12 meses; não é o total histórico de commits.
@@ -38,8 +39,11 @@ anterior não tinha acesso aos PRs dos repositórios privados do usuário.
   paginação. **Repositórios com contribuições:** somente públicos, como no cartão
   anterior.
 
-O arquivo publica apenas totais agregados e a data da consulta. Não grava nomes
-de repositórios privados, títulos de PRs, código ou credenciais.
+O arquivo publica apenas totais agregados. Não grava nomes de repositórios
+privados, títulos de PRs, código ou credenciais. O modelo original está em
+`scripts/templates/stats-github-dark.svg`, com a licença MIT do
+[projeto original](https://github.com/vn7n24fzkq/github-profile-summary-cards)
+em `scripts/templates/LICENSE-summary-cards.txt`.
 
 ### Configuração única para atualizar pelo GitHub Actions
 
@@ -60,8 +64,10 @@ por causa do cache. Atualizar ao abrir o perfil não dispara uma nova consulta.
    nos commits ou em mensagens de chat.
 3. Abra [o workflow das estatísticas](https://github.com/joaoqueirozst/joaoqueirozst/actions/workflows/profile-stats.yml),
    clique em **Run workflow**, selecione `main` e confirme **Run workflow**.
-4. Ao terminar, confira o novo `profile/stats.svg` e o horário no rodapé. As próximas
-   consultas serão agendadas automaticamente. Renove o secret quando o token
+4. Ao terminar, confira os valores em `profile/stats.svg` e o horário da consulta
+   no resumo da execução em Actions. As próximas consultas serão agendadas
+   automaticamente, e um commit só é criado quando os valores mudam.
+   Renove o secret quando o token
    expirar. Sem secret, o workflow avisa no resumo e mantém o cartão existente;
    uma credencial inválida faz a execução falhar sem substituir a imagem.
 

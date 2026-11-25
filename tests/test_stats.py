@@ -1,5 +1,6 @@
 import importlib.util
 from pathlib import Path
+import re
 import tempfile
 import unittest
 from xml.etree import ElementTree
@@ -14,7 +15,6 @@ def page(stars=(2,), more=False, cursor=None):
     return {
         'login': 'joaoqueirozst',
         'pullRequests': {'totalCount': 3},
-        'mergedPullRequests': {'totalCount': 1},
         'issues': {'totalCount': 2},
         'contributionsCollection': {'totalCommitContributions': 150},
         'repositoriesContributedTo': {'totalCount': 10},
@@ -37,7 +37,6 @@ class StatsTests(unittest.TestCase):
         self.assertEqual(calls, [None, 'next'])
         self.assertEqual(result['public_stars'], 9)
         self.assertEqual(result['total_prs'], 3)
-        self.assertEqual(result['merged_prs'], 1)
 
     def test_different_account_or_automatic_bot_is_rejected(self):
         response = page()
@@ -82,10 +81,26 @@ class StatsTests(unittest.TestCase):
             svg = target.read_text()
             ElementTree.fromstring(svg)
             self.assertIn('Total PRs', svg)
-            self.assertIn('PRs incorporados', svg)
-            self.assertIn('últimos 12 meses', svg)
+            self.assertIn('Stats', svg)
+            self.assertNotIn('PRs incorporados', svg)
+            self.assertNotIn('Atualizado em', svg)
             self.assertNotIn('secret-project', svg)
             self.assertNotIn('secret-credential', svg)
+
+    def test_only_the_five_numbers_change_in_the_original_layout(self):
+        values = stats.collect_stats('joaoqueirozst', lambda _: page())
+        svg = stats.render_svg(values)
+        template = (Path(stats.__file__).parent / 'templates/stats-github-dark.svg').read_text()
+        replaced, n = re.subn(r'(<text\b[^>]*\bx="130"[^>]*>)(\d+)(</text>)', r'\1VALUE\3', svg)
+        expected, placeholders = re.subn(r'\{\{[a-z_]+\}\}', 'VALUE', template)
+        self.assertEqual(n, 5)
+        self.assertEqual(placeholders, 5)
+        self.assertEqual(replaced, expected)
+        root = ElementTree.fromstring(svg)
+        self.assertEqual(root.attrib, {'width': '340', 'height': '200', 'viewBox': '0 0 340 200'})
+        texts = [item.text for item in root.iter() if item.tag.endswith('}text')]
+        self.assertEqual(texts[:6], ['Stats', 'Total Stars:', 'Total Commits:', 'Total PRs:', 'Total Issues:', 'Contributed to:'])
+        self.assertEqual(texts[6:], ['2', '150', '3', '2', '10'])
 
 
 if __name__ == '__main__':
