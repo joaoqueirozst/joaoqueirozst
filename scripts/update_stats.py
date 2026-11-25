@@ -1,8 +1,10 @@
 """Atualiza o cartão com totais agregados do dono do perfil autenticado no gh."""
 
 import argparse
+import hashlib
 import json
 from pathlib import Path
+import re
 import subprocess
 import sys
 
@@ -88,13 +90,28 @@ def render_svg(stats):
     return svg
 
 
-def update(username, output, api=github_stats_page):
+def version_image(markdown, svg):
+    # Uma URL por conteúdo evita reutilizar no navegador o cartão anterior.
+    version = hashlib.sha256(svg.encode('utf-8')).hexdigest()[:12]
+    updated, matches = re.subn(
+        r'(?<=src=")\./profile/stats\.svg(?:\?[^\"]*)?(?=")',
+        './profile/stats.svg?v=' + version, markdown,
+    )
+    if matches != 1:
+        raise ValueError('Referência ao cartão não encontrada de forma única no README.')
+    return updated
+
+
+def update(username, output, api=github_stats_page, readme=None):
     stats = collect_stats(username, api)
     svg = render_svg(stats)
+    markdown = None if readme is None else version_image(readme.read_text(encoding='utf-8'), svg)
     output.parent.mkdir(parents=True, exist_ok=True)
     temporary = output.with_suffix('.svg.tmp')
     temporary.write_text(svg, encoding='utf-8')
     temporary.replace(output)
+    if readme is not None:
+        readme.write_text(markdown, encoding='utf-8')
     return stats
 
 
@@ -102,9 +119,10 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--username', default='joaoqueirozst')
     parser.add_argument('--output', type=Path, default=Path(__file__).resolve().parents[1] / 'profile/stats.svg')
+    parser.add_argument('--readme', type=Path, default=Path(__file__).resolve().parents[1] / 'README.md')
     args = parser.parse_args()
     try:
-        stats = update(args.username, args.output)
+        stats = update(args.username, args.output, readme=args.readme)
     except (RuntimeError, ValueError, KeyError, TypeError, OSError, subprocess.TimeoutExpired) as error:
         # Não reproduz respostas da API ou valores de credenciais nos logs.
         print(f'Não foi possível atualizar o cartão ({type(error).__name__}). Confira a credencial e suas permissões. O cartão anterior foi preservado.', file=sys.stderr)

@@ -52,16 +52,14 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.PROFILE_STATS_TOKEN }}
           PROFILE_OWNER: ${{ github.repository_owner }}
-        run: |
-          python3 scripts/update_stats.py --username "$PROFILE_OWNER"
-          echo "Dados consultados em $(date -u '+%Y-%m-%d %H:%M UTC'). O layout original do Stats foi preservado." >> "$GITHUB_STEP_SUMMARY"
+        run: python3 scripts/update_stats.py --username "$PROFILE_OWNER"
 
       - name: Publicar o cartão atualizado
         if: steps.credential.outputs.configured == 'true'
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add profile/stats.svg
+          git add profile/stats.svg README.md
           if ! git diff --cached --quiet; then
             git commit -m "Atualiza estatísticas do perfil"
             git pull --rebase origin main

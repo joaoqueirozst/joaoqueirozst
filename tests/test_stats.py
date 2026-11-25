@@ -102,6 +102,14 @@ class StatsTests(unittest.TestCase):
         self.assertEqual(texts[:6], ['Stats', 'Total Stars:', 'Total Commits:', 'Total PRs:', 'Total Issues:', 'Contributed to:'])
         self.assertEqual(texts[6:], ['2', '150', '3', '2', '10'])
 
+    def test_image_version_changes_only_when_contents_change_and_preserves_layout(self):
+        markdown = '<div align="center">\n<img height="180em" src="./profile/stats.svg" alt="Estatísticas do GitHub" />\n</div>'
+        first = stats.version_image(markdown, 'first image')
+        self.assertEqual(first, stats.version_image(first, 'first image'))
+        second = stats.version_image(first, 'second image')
+        self.assertNotEqual(first, second)
+        self.assertEqual(re.sub(r'\?v=[a-f0-9]+', '', second), markdown)
+
 
 if __name__ == '__main__':
     unittest.main()
