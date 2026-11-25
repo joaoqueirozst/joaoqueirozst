@@ -1,0 +1,66 @@
+name: Atualizar estatísticas do perfil
+
+on:
+  schedule:
+    - cron: "23 * * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/profile-stats.yml
+      - scripts/update_stats.py
+      - tests/test_stats.py
+
+permissions:
+  contents: read
+
+concurrency:
+  group: profile-stats
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Testar a coleta e a preservação do cartão
+        run: python3 -B -m unittest discover -s tests -p 'test_stats.py' -v
+
+      - name: Verificar a credencial pessoal
+        id: credential
+        env:
+          PROFILE_TOKEN: ${{ secrets.PROFILE_STATS_TOKEN }}
+        run: |
+          if [ -n "$PROFILE_TOKEN" ]; then
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::notice::Configure o secret PROFILE_STATS_TOKEN para atualizar os totais privados. O cartão atual será preservado."
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+            echo 'Atualização pendente: configure o secret PROFILE_STATS_TOKEN. Veja scripts/README.md. O cartão existente foi preservado.' >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Consultar os totais públicos e privados
+        if: steps.credential.outputs.configured == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.PROFILE_STATS_TOKEN }}
+          PROFILE_OWNER: ${{ github.repository_owner }}
+        run: python3 scripts/update_stats.py --username "$PROFILE_OWNER"
+
+      - name: Publicar o cartão atualizado
+        if: steps.credential.outputs.configured == 'true'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add profile/stats.svg
+          if ! git diff --cached --quiet; then
+            git commit -m "Atualiza estatísticas do perfil"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi

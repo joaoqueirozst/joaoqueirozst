@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="495" height="234" viewBox="0 0 495 234" role="img" aria-labelledby="title desc">
+  <title id="title">Estatísticas do GitHub</title>
+  <desc id="desc">Totais agregados dos dados acessíveis à credencial do perfil. PRs e issues incluem repositórios privados acessíveis. Commits cobrem os últimos 12 meses.</desc>
+  <rect x="0.5" y="0.5" width="494" height="233" rx="6" fill="#0d1117" stroke="#30363d"/>
+  <g font-family="Segoe UI, Ubuntu, Helvetica Neue, sans-serif" font-size="13" fill="#c9d1d9">
+    <text x="24" y="30" fill="#58a6ff" font-size="18" font-weight="600">Estatísticas do GitHub</text>
+    <text x="24" y="61">Total Stars (públicas)</text><text x="466" y="61" text-anchor="end" font-weight="600">2</text><text x="24" y="85">Commits (últimos 12 meses)</text><text x="466" y="85" text-anchor="end" font-weight="600">162</text><text x="24" y="109">Total PRs</text><text x="466" y="109" text-anchor="end" font-weight="600">1</text><text x="24" y="133">PRs incorporados</text><text x="466" y="133" text-anchor="end" font-weight="600">1</text><text x="24" y="157">Total Issues</text><text x="466" y="157" text-anchor="end" font-weight="600">0</text><text x="24" y="181">Repositórios públicos com contribuições</text><text x="466" y="181" text-anchor="end" font-weight="600">10</text>
+    <text x="24" y="219" fill="#8b949e" font-size="10">Atualizado em 25/11/2026 19:46 UTC</text>
+  </g>
+</svg>
