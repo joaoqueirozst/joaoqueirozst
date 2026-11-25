@@ -23,7 +23,7 @@ para reaplicar os totais salvos ao gráfico circular.
 
 ## Atualizar as estatísticas do perfil
 
-O cartão `profile/stats.svg` é gerado por `scripts/update_stats.py`, consultando a
+O cartão `profile/stats-<versão>.svg` é gerado por `scripts/update_stats.py`, consultando a
 API GraphQL com o GitHub CLI autenticado como o dono do perfil. O layout original
 do GitHub Profile Summary Cards, tema `github_dark`, é preservado integralmente:
 título, dimensões, cores, ícones, logotipo e as mesmas cinco linhas. Somente os
@@ -50,9 +50,10 @@ em `scripts/templates/LICENSE-summary-cards.txt`.
 O workflow `.github/workflows/profile-stats.yml` consulta os dados a cada hora,
 no minuto 23, e permite execução manual. O computador local pode estar desligado.
 O horário pode sofrer atrasos do GitHub. Quando os números mudam, o script também
-atualiza a versão da URL da imagem no README para evitar a reutilização do cartão
-antigo pelo navegador. A versão usa o conteúdo da imagem, sem mostrar data ou
-horário no cartão. Atualizar ao abrir o perfil não dispara uma nova consulta.
+salva a imagem com um novo nome e ajusta sua referência no README, sem depender
+de parâmetros na URL para renovar o cache. O cartão anterior é removido, mantendo
+uma única imagem. A versão usa o conteúdo da imagem, sem mostrar data ou horário
+no cartão. Atualizar ao abrir o perfil não dispara uma nova consulta.
 
 1. Crie um [personal access token classic](https://github.com/settings/tokens/new)
    na conta do perfil, com um nome como `Estatisticas do perfil`, validade definida
@@ -66,7 +67,7 @@ horário no cartão. Atualizar ao abrir o perfil não dispara uma nova consulta.
    nos commits ou em mensagens de chat.
 3. Abra [o workflow das estatísticas](https://github.com/joaoqueirozst/joaoqueirozst/actions/workflows/profile-stats.yml),
    clique em **Run workflow**, selecione `main` e confirme **Run workflow**.
-4. Ao terminar, confira os valores em `profile/stats.svg`. As próximas consultas serão agendadas
+4. Ao terminar, confira os valores no cartão indicado pelo README. As próximas consultas serão agendadas
    automaticamente, e um commit só é criado quando os valores mudam.
    Renove o secret quando o token
    expirar. Sem secret, o workflow avisa no resumo e mantém o cartão existente;
@@ -88,7 +89,7 @@ Com o `gh` autenticado como `joaoqueirozst` e com acesso aos projetos privados:
 
 ```bash
 python3 scripts/update_stats.py
-git add profile/stats.svg README.md
+git add -A -- profile README.md
 git commit -m "Atualiza estatísticas do perfil"
 git push origin main
 ```

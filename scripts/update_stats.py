@@ -91,11 +91,11 @@ def render_svg(stats):
 
 
 def version_image(markdown, svg):
-    # Uma URL por conteúdo evita reutilizar no navegador o cartão anterior.
+    # O nome do arquivo muda; não depende de parâmetros na URL para renovar o cache.
     version = hashlib.sha256(svg.encode('utf-8')).hexdigest()[:12]
     updated, matches = re.subn(
-        r'(?<=src=")\./profile/stats\.svg(?:\?[^\"]*)?(?=")',
-        './profile/stats.svg?v=' + version, markdown,
+        r'(?<=src=")\./profile/stats(?:-[a-f0-9]{12})?\.svg(?:\?[^\"]*)?(?=")',
+        './profile/stats-' + version + '.svg', markdown,
     )
     if matches != 1:
         raise ValueError('Referência ao cartão não encontrada de forma única no README.')
@@ -105,13 +105,23 @@ def version_image(markdown, svg):
 def update(username, output, api=github_stats_page, readme=None):
     stats = collect_stats(username, api)
     svg = render_svg(stats)
-    markdown = None if readme is None else version_image(readme.read_text(encoding='utf-8'), svg)
-    output.parent.mkdir(parents=True, exist_ok=True)
-    temporary = output.with_suffix('.svg.tmp')
+    markdown = None
+    previous = None
+    target = output
+    if readme is not None:
+        original = readme.read_text(encoding='utf-8')
+        markdown = version_image(original, svg)
+        pattern = r'src="\./profile/(stats(?:-[a-f0-9]{12})?\.svg)'
+        previous = output.parent / re.search(pattern, original)[1]
+        target = output.parent / re.search(pattern, markdown)[1]
+    target.parent.mkdir(parents=True, exist_ok=True)
+    temporary = target.with_suffix('.svg.tmp')
     temporary.write_text(svg, encoding='utf-8')
-    temporary.replace(output)
+    temporary.replace(target)
     if readme is not None:
         readme.write_text(markdown, encoding='utf-8')
+        if previous != target:
+            previous.unlink(missing_ok=True)
     return stats
 
 

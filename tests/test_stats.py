@@ -108,7 +108,28 @@ class StatsTests(unittest.TestCase):
         self.assertEqual(first, stats.version_image(first, 'first image'))
         second = stats.version_image(first, 'second image')
         self.assertNotEqual(first, second)
-        self.assertEqual(re.sub(r'\?v=[a-f0-9]+', '', second), markdown)
+        self.assertEqual(re.sub(r'stats-[a-f0-9]+\.svg', 'stats.svg', second), markdown)
+
+    def test_publication_changes_filename_and_keeps_only_the_current_card(self):
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory) / 'profile/stats.svg'
+            output.parent.mkdir()
+            output.write_text('old card with one PR')
+            readme = Path(directory) / 'README.md'
+            readme.write_text('<img height="180em" src="./profile/stats.svg?v=old" />')
+            stats.update('joaoqueirozst', output, lambda _: page(), readme=readme)
+            first = list(output.parent.glob('*.svg'))
+            self.assertEqual(len(first), 1)
+            self.assertNotEqual(first[0].name, 'stats.svg')
+            self.assertIn(first[0].name, readme.read_text())
+            response = page()
+            response['pullRequests']['totalCount'] = 4
+            stats.update('joaoqueirozst', output, lambda _: response, readme=readme)
+            second = list(output.parent.glob('*.svg'))
+            self.assertEqual(len(second), 1)
+            self.assertNotEqual(first[0], second[0])
+            self.assertIn(second[0].name, readme.read_text())
+            self.assertNotIn('?', readme.read_text())
 
 
 if __name__ == '__main__':
